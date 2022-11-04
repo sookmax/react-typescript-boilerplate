@@ -1,15 +1,20 @@
-import { Configuration } from "webpack";
+import { Configuration, WebpackPluginInstance } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import packageJson from "./package.json"; // this is possible because of 'resolveJsonModule' in 'tsconfig.json'
+
+const coreJsVersion = packageJson.dependencies["core-js"].replace("^", "");
 
 type WebpackEnv = {
   WEBPACK_SERVE?: boolean;
   WEBPACK_BUILD?: boolean;
-  debug?: boolean;
+  dev?: boolean;
+  noMinify?: boolean;
+  babelDebug?: boolean;
 };
 
 export default (env: WebpackEnv): Configuration => {
-  const isDevelopment = env.WEBPACK_SERVE ? true : false;
+  const isDevelopment = env.WEBPACK_SERVE || env.dev ? true : false;
 
   return {
     mode: isDevelopment ? "development" : "production",
@@ -41,6 +46,13 @@ export default (env: WebpackEnv): Configuration => {
                     // https://webpack.js.org/guides/tree-shaking/#conclusion
                     // https://babeljs.io/docs/en/babel-preset-env#modules
                     modules: false,
+                    // useBuiltIns="usage" will add polyfills via importing `core-js` only when they are used (file-based).
+                    // that's why `core-js` was added as a dependency.
+                    // to print some useful information regarding supported browsers and added polyfills,
+                    // run `npx webpack --env babelDebug` and examine the output.
+                    useBuiltIns: "usage",
+                    corejs: coreJsVersion,
+                    debug: env.babelDebug,
                   },
                 ],
                 [
@@ -81,7 +93,7 @@ export default (env: WebpackEnv): Configuration => {
       // https://github.com/pmmmwh/react-refresh-webpack-plugin/blob/main/docs/TROUBLESHOOTING.md#edits-always-lead-to-full-reload
       // https://github.com/facebook/react/issues/16604#issuecomment-528663101
       isDevelopment && new ReactRefreshPlugin(),
-    ].filter(Boolean),
+    ].filter(Boolean) as WebpackPluginInstance[],
     optimization: isDevelopment
       ? {
           runtimeChunk: "single",
@@ -96,7 +108,7 @@ export default (env: WebpackEnv): Configuration => {
           },
         }
       : {
-          minimize: env.debug ? false : true,
+          minimize: env.noMinify ? false : true,
         },
   };
 };

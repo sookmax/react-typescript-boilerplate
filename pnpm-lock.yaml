@@ -14,6 +14,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.42.0
   '@typescript-eslint/parser': ^5.42.0
   babel-loader: ^9.0.1
+  core-js: ^3.26.0
   eslint: ^8.26.0
   eslint-plugin-react: ^7.31.10
   html-webpack-plugin: ^5.5.0
@@ -29,6 +30,7 @@ specifiers:
   webpack-merge: ^5.8.0
 
 dependencies:
+  core-js: 3.26.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -2443,6 +2445,11 @@ packages:
     resolution: {integrity: sha512-LiN6fylpVBVwT8twhhluD9TzXmZQQsr2I2eIKtWNbZI1XMfBT7CV18itaN6RA7EtQd/SDdRx/wzvAShX2HvhQA==}
     requiresBuild: true
     dev: true
+
+  /core-js/3.26.0:
+    resolution: {integrity: sha512-+DkDrhoR4Y0PxDz6rurahuB+I45OsEUv8E1maPTB6OuHRohMMcznBq9TMpdpDMm/hUPob/mJJS3PqgbHpMTQgw==}
+    requiresBuild: true
+    dev: false
 
   /core-util-is/1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}

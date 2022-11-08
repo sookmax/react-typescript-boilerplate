@@ -15,12 +15,21 @@ module.exports = {
       version: "detect",
     },
   },
-  overrides: [],
+  overrides: [
+    {
+      files: ["src/**/*.test.*"],
+      rules: {
+        "no-undef": "off",
+      },
+    },
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint"],
-  rules: {},
+  rules: {
+    "react/prop-types": "off",
+  },
 };

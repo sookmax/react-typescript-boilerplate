@@ -5,7 +5,7 @@ export default function App() {
 
   return (
     <div>
-      <div>Hello Webpack!?</div>
+      <div>Hello Webpack!!</div>
       <button onClick={() => setState((s) => s + 1)}>click</button>
       <div>{state}</div>
     </div>

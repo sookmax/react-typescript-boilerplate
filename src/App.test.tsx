@@ -25,5 +25,27 @@ it("renders with the text specified", () => {
     createRoot(container).render(<App />);
   });
 
-  expect(container.textContent).toMatch(/Hello Webpack!.*/);
+  // expect() call returns an `expectation` object.
+  // You can call `matchers` on them.
+  expect(container.textContent).toMatch(/click.*/i);
+});
+
+it("changes the value when clicked", () => {
+  act(() => {
+    // https://reactjs.org/docs/test-utils.html#act
+    // it's required to wrap the code rendering the component
+    createRoot(container).render(<App />);
+  });
+
+  const button = document.querySelector("[data-testid=app-button]");
+  const counter = document.querySelector("[data-testid=app-counter]");
+
+  act(() => {
+    // "Note that you need to pass { bubbles: true} in each event you create
+    // for it to reach the React listener because React automatically delegatees
+    // events to the root."
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+
+  expect(counter.innerHTML).toBe("1");
 });

@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function App() {
   const [state, setState] = useState(0);
-
-  console.log(state);
-
-  useEffect(() => {
-    console.log("effect runs");
-  });
 
   return (
     <div>

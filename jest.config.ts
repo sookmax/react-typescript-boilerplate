@@ -1,10 +1,12 @@
 import type { Config } from "jest";
 
 const config: Config = {
+  roots: ["<rootDir>/src"],
   // `jest-environment-jsdom` package is required.
   testEnvironment: "jsdom",
   // https://github.com/jsdom/jsdom/issues/1724
-  setupFiles: ["<rootDir>/jest.setup.js"],
+  setupFiles: ["<rootDir>/jest-setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/jest-setup-afterEnv.ts"],
   transform: {
     // this looks redundant since it's the same as default, but
     // it's important to include here when using `pnpm` as your package manager.

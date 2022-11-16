@@ -1,9 +1,6 @@
 import { Configuration, WebpackPluginInstance } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
-import packageJson from "./package.json"; // this is possible because of 'resolveJsonModule' in 'tsconfig.json'
-
-const coreJsVersion = packageJson.dependencies["core-js"].replace("^", "");
 
 type WebpackEnv = {
   WEBPACK_SERVE?: boolean;

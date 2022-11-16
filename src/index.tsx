@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import Login from "./Login";
 
 if (process.env.NODE_ENV === "development") {
-  import("./mocks").then((module) => {
+  import("./api-mocks/browser").then((module) => {
     module.worker.start();
   });
 }

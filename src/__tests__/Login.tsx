@@ -2,7 +2,7 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import Login from "../Login";
 // https://mswjs.io/docs/getting-started/integrate/node
 import { server } from "../api-mocks/node";
-import { getHandlers, FAKE_TOKEN } from "../api-mocks/handlers";
+import { FAKE_TOKEN, getHandlers } from "../api-mocks/handlers";
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
@@ -18,8 +18,6 @@ afterEach(() => {
 afterAll(() => server.close());
 
 test("allows the user to login successfully", async () => {
-  server.use(...getHandlers("sucess"));
-
   render(<Login />);
 
   // fill out the form

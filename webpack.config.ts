@@ -32,6 +32,30 @@ export default (env: WebpackEnv): Configuration => {
           // (I should confirm this more thoroughly)
           use: "babel-loader",
         },
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                /**
+                 * Allows to enables/disables or setups number of loaders applied before CSS loader
+                 * for @import at-rules, CSS modules and ICSS imports, i.e. @import/composes/@value value from './values.css'/etc.
+                 * The option importLoaders allows you to configure how many loaders
+                 * before css-loader should be applied to @imported resources and CSS modules/ICSS imports.
+                 *
+                 * 0 => no loaders (default);
+                 * 1 => postcss-loader;
+                 */
+                //
+                importLoaders: 1,
+              },
+            },
+            "postcss-loader",
+          ],
+        },
       ],
     },
     resolve: {

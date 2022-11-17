@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Login from "./Login";
+import SimpleModal from "./SimpleModal";
+import "./index.css";
 
 if (process.env.NODE_ENV === "development") {
   import("./api-mocks/browser").then((module) => {
@@ -8,9 +9,12 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
-const root = createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <Login />
-  </React.StrictMode>
-);
+const rootEl = document.getElementById("root");
+if (rootEl) {
+  const root = createRoot(rootEl);
+  root.render(
+    <React.StrictMode>
+      <SimpleModal />
+    </React.StrictMode>
+  );
+}

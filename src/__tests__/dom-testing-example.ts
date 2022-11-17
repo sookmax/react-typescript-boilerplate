@@ -4,7 +4,7 @@ import {
   getByTestId,
   queryByTestId,
   waitFor,
-} from "@testing-library/dom";
+} from "@testing-library/react";
 
 function getExampleDOM() {
   const div = document.createElement("div");

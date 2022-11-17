@@ -46,7 +46,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="font-extrabold">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="usernameInput">Username</label>

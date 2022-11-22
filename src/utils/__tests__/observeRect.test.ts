@@ -1,4 +1,4 @@
-import obeserveRect from "../observeRect";
+import { obeserveRect } from "../observeRect";
 
 const div = document.createElement("div");
 const callback = () => counter++;

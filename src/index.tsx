@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import AnimatedRect from "./examples/AnimatedRect";
+import Tabs from "./examples/Tabs";
 import "./index.css";
 
 if (process.env.NODE_ENV === "development") {
@@ -14,7 +14,7 @@ if (rootEl) {
   const root = createRoot(rootEl);
   root.render(
     <React.StrictMode>
-      <AnimatedRect />
+      <Tabs />
     </React.StrictMode>
   );
 }

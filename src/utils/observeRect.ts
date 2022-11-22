@@ -1,6 +1,6 @@
 // https://github.com/reach/observe-rect
 
-type Callback = (domRect: DOMRect) => void;
+type Callback = (domRect: DOMRect, initial: boolean) => void;
 
 type NodeData = {
   rect?: DOMRect;
@@ -28,7 +28,7 @@ function startLoop() {
   OBSERVED_NODES.forEach((data, node) => {
     const newRect = node.getBoundingClientRect();
     if (!data.rect || hasRectPropChanged(data.rect, newRect)) {
-      data.callbacks.forEach((cb) => cb(newRect));
+      data.callbacks.forEach((cb) => cb(newRect, !data.rect));
       data.rect = newRect;
     }
   });
@@ -36,7 +36,7 @@ function startLoop() {
   rafId = requestAnimationFrame(startLoop);
 }
 
-export default function obeserveRect(node: Element, callback: Callback) {
+export function obeserveRect(node: Element, callback: Callback) {
   return {
     observe() {
       if (OBSERVED_NODES.has(node)) {

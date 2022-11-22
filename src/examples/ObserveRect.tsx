@@ -4,7 +4,7 @@ import ChevronLeftIcon from "../icons/ChevronLeftIcon";
 import ChevronRightIcon from "../icons/ChevronRightIcon";
 import ChevronUpIcon from "../icons/ChevronUpIcon";
 import { classNames } from "../utils";
-import obeserveRect from "../utils/observeRect";
+import { obeserveRect } from "../utils/observeRect";
 
 const templateColumnsDefault = "grid-cols-[1fr_5fr_1fr]";
 const autoRowDefault = "auto-rows-[1fr_5fr_1fr]";

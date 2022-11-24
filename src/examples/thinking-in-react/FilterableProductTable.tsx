@@ -18,7 +18,7 @@ export default function FilterableProductTable() {
     .filter((item) => !showStocked || item.stocked);
 
   return (
-    <div className="border-2 border-fuchsia-300 p-2 m-2 space-y-1">
+    <div className="m-2 space-y-1 border-2 border-fuchsia-300 p-2">
       <SearchBar
         className={classNames("border-2 border-amber-200")}
         query={query}
@@ -27,7 +27,7 @@ export default function FilterableProductTable() {
         setToggled={setShowStocked}
       />
       <ProductTable
-        className="border-2 border-lime-300 space-y-2 p-2"
+        className="space-y-2 border-2 border-lime-300 p-2"
         filteredData={filteredData}
       >
         {useCallback(

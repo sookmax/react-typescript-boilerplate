@@ -25,9 +25,9 @@ export default function YourFirstForm() {
 
   return (
     <div
-      className={classNames("w-full h-full flex justify-center items-center")}
+      className={classNames("flex h-full w-full items-center justify-center")}
     >
-      <div className={classNames("w-2/3 h-2/3 border border-gray-200 p-4")}>
+      <div className={classNames("h-2/3 w-2/3 border border-gray-200 p-4")}>
         <form onSubmit={onSubmit}>
           <ul className="space-y-4">
             <li>
@@ -54,9 +54,9 @@ export default function YourFirstForm() {
                   name="message"
                   onChange={onChange}
                   className={classNames(
-                    "resize-none outline-none w-full h-full p-2",
-                    "border rounded-md",
-                    "focus:border-green-600 focus:border-2",
+                    "h-full w-full resize-none p-2 outline-none",
+                    "rounded-md border",
+                    "focus:border-2 focus:border-green-600",
                     "transition-all duration-100"
                   )}
                 />
@@ -67,7 +67,7 @@ export default function YourFirstForm() {
                     "px-1",
                     "pointer-events-none",
                     "bg-white",
-                    "text-sm md:text-base text-gray-500",
+                    "text-sm text-gray-500 md:text-base",
                     "[textarea:focus~&]:-translate-y-[1.2rem]",
                     "[textarea:focus~&]:-translate-x-[0.3rem]",
                     "[textarea:focus~&]:scale-75",

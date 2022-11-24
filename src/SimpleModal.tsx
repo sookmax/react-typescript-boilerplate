@@ -11,11 +11,11 @@ export default function App() {
         click to open the modal
       </button>
       {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)} className="w-[80%] h-1/3">
+        <Modal onClose={() => setIsModalOpen(false)} className="h-1/3 w-[80%]">
           <div
             className={classNames(
-              "w-full h-full",
-              "flex flex-col justify-evenly items-center",
+              "h-full w-full",
+              "flex flex-col items-center justify-evenly",
               "bg-white text-black",
               "rounded-lg",
               "p-4"
@@ -35,7 +35,7 @@ export default function App() {
             </span>
             <button
               onClick={() => setIsModalOpen(false)}
-              className="mt-4 bg-orange-400 rounded-lg p-3"
+              className="mt-4 rounded-lg bg-orange-400 p-3"
             >
               custom close button
             </button>

@@ -73,7 +73,7 @@ export default function Modal({ className, onClose, children }: Props) {
           className={classNames(
             "absolute top-0 right-0",
             "text-black",
-            "w-8 h-8",
+            "h-8 w-8",
             "p-1"
           )}
         >

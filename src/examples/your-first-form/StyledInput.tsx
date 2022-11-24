@@ -31,8 +31,8 @@ export default function StyledInput({
         onChange={_onChange}
         {...inputPropsRest}
         className={classNames(
-          "w-full h-12 p-2",
-          "border rounded-md",
+          "h-12 w-full p-2",
+          "rounded-md border",
           "transition-all duration-100",
           "outline-none",
           "focus:border-2 focus:border-green-600"
@@ -41,12 +41,12 @@ export default function StyledInput({
       <label
         htmlFor={id}
         className={classNames(
-          "absolute pointer-events-none z-10",
+          "pointer-events-none absolute z-10",
           "top-1/2 -translate-y-1/2",
           "left-2",
           "px-1",
           "bg-white",
-          "text-gray-500 text-sm md:text-base",
+          "text-sm text-gray-500 md:text-base",
           "[input:focus~&]:-translate-y-[2.2rem]",
           "[input:focus~&]:scale-75",
           isValue && "-translate-y-[2.2rem] scale-75",

@@ -39,7 +39,7 @@ export default function Example() {
     <div
       ref={gridElRef}
       className={classNames(
-        "grid w-full h-full",
+        "grid h-full w-full",
         templateColumnsDefault,
         autoRowDefault
       )}
@@ -48,9 +48,9 @@ export default function Example() {
       }}
     >
       <div className="bg-slate-300"></div>
-      <div className="bg-emerald-400 flex flex-col justify-center items-center space-y-2">
+      <div className="flex flex-col items-center justify-center space-y-2 bg-emerald-400">
         <button
-          className="w-6 h-6 active:bg-emerald-500"
+          className="h-6 w-6 active:bg-emerald-500"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "row1-dec");
@@ -59,7 +59,7 @@ export default function Example() {
           <ChevronUpIcon />
         </button>
         <button
-          className="w-6 h-6 active:bg-emerald-500"
+          className="h-6 w-6 active:bg-emerald-500"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "row1-inc");
@@ -69,9 +69,9 @@ export default function Example() {
         </button>
       </div>
       <div className="bg-slate-300"></div>
-      <div className="bg-yellow-300 flex justify-center items-center space-x-2">
+      <div className="flex items-center justify-center space-x-2 bg-yellow-300">
         <button
-          className="w-6 h-6 active:bg-yellow-400"
+          className="h-6 w-6 active:bg-yellow-400"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "col1-dec");
@@ -80,7 +80,7 @@ export default function Example() {
           <ChevronLeftIcon />
         </button>
         <button
-          className="w-6 h-6 active:bg-yellow-400"
+          className="h-6 w-6 active:bg-yellow-400"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "col1-inc");
@@ -89,8 +89,8 @@ export default function Example() {
           <ChevronRightIcon />
         </button>
       </div>
-      <div ref={measuredElRef} className="bg-sky-300 flex-grow p-4">
-        <div className="text-lg font-bold mb-2">I&apos;m being measured</div>
+      <div ref={measuredElRef} className="flex-grow bg-sky-300 p-4">
+        <div className="mb-2 text-lg font-bold">I&apos;m being measured</div>
         <div>My width: {rect?.width}</div>
         <div>My height: {rect?.height}</div>
         <div>My top: {rect?.top}</div>
@@ -98,9 +98,9 @@ export default function Example() {
         <div>My left: {rect?.left}</div>
         <div>My right: {rect?.right}</div>
       </div>
-      <div className="bg-yellow-300 flex justify-center items-center space-x-2">
+      <div className="flex items-center justify-center space-x-2 bg-yellow-300">
         <button
-          className="w-6 h-6 active:bg-yellow-400"
+          className="h-6 w-6 active:bg-yellow-400"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "col3-inc");
@@ -109,7 +109,7 @@ export default function Example() {
           <ChevronLeftIcon />
         </button>
         <button
-          className="w-6 h-6 active:bg-yellow-400"
+          className="h-6 w-6 active:bg-yellow-400"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "col3-dec");
@@ -119,9 +119,9 @@ export default function Example() {
         </button>
       </div>
       <div className="bg-slate-300"></div>
-      <div className="bg-emerald-400 flex flex-col justify-center items-center space-y-2">
+      <div className="flex flex-col items-center justify-center space-y-2 bg-emerald-400">
         <button
-          className="w-6 h-6 active:bg-emerald-500"
+          className="h-6 w-6 active:bg-emerald-500"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "row3-inc");
@@ -130,7 +130,7 @@ export default function Example() {
           <ChevronUpIcon />
         </button>
         <button
-          className="w-6 h-6 active:bg-emerald-500"
+          className="h-6 w-6 active:bg-emerald-500"
           onPointerDown={() => {
             loopRAF = true;
             gridElRef.current && onPointerDown(gridElRef.current, "row3-dec");

@@ -35,6 +35,8 @@ specifiers:
   postcss: ^8.4.19
   postcss-cli: ^10.0.0
   postcss-loader: ^7.0.1
+  prettier: 2.8.0
+  prettier-plugin-tailwindcss: ^0.1.13
   react: ^18.2.0
   react-dom: ^18.2.0
   react-refresh: ^0.14.0
@@ -87,6 +89,8 @@ devDependencies:
   postcss: 8.4.19
   postcss-cli: 10.0.0_v776zzvn44o7tpgzieipaairwm
   postcss-loader: 7.0.1_upg3rk2kpasnbk27hkqapxaxfq
+  prettier: 2.8.0
+  prettier-plugin-tailwindcss: 0.1.13_prettier@2.8.0
   react-refresh: 0.14.0
   style-loader: 3.3.1_webpack@5.75.0
   tailwindcss: 3.2.4_v776zzvn44o7tpgzieipaairwm
@@ -6363,6 +6367,21 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier-plugin-tailwindcss/0.1.13_prettier@2.8.0:
+    resolution: {integrity: sha512-/EKQURUrxLu66CMUg4+1LwGdxnz8of7IDvrSLqEtDqhLH61SAlNNUSr90UTvZaemujgl3OH/VHg+fyGltrNixw==}
+    engines: {node: '>=12.17.0'}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.8.0
+    dev: true
+
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-error/4.0.0:

@@ -67,13 +67,12 @@ export default function Tabs() {
         </div>
       </TabsContext.Provider>
       <div
-        className="absolute bg-pink-400"
+        className="bg-pink-400"
         style={{
           transition: transitionStyle,
+          transform: `translate(${rect?.left}px)`,
           width: rect?.width,
           height: 4,
-          top: rect?.bottom,
-          left: rect?.left,
         }}
       />
     </>

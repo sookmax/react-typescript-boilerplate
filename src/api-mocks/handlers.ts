@@ -15,6 +15,9 @@ const handlers = [
     // - ctx: a group of functions that help to set a status code, headers, body, etc. of the mocked response.
     return res(ctx.status(200), ctx.json({ token: FAKE_TOKEN }));
   }),
+  rest.post("/api/submit", (req, res, ctx) => {
+    return res(ctx.status(200));
+  }),
 ];
 
 const errorHandlers = [

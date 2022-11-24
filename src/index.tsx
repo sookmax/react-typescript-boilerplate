@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Tabs from "./examples/Tabs";
+import YourFirstForm from "./examples/your-first-form/YourFirstForm";
 import "./index.css";
 
 if (process.env.NODE_ENV === "development") {
@@ -14,7 +14,7 @@ if (rootEl) {
   const root = createRoot(rootEl);
   root.render(
     <React.StrictMode>
-      <Tabs />
+      <YourFirstForm />
     </React.StrictMode>
   );
 }

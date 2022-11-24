@@ -34,3 +34,4 @@ function TextAreaImpl({ onChange, ...rest }: Props<"textarea">) {
 }
 
 export const TextArea = React.memo(TextAreaImpl);
+export type TextAreaProps = Parameters<typeof TextArea>[0];

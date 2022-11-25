@@ -27,47 +27,43 @@ export default function YourFirstForm() {
     <div
       className={classNames("flex h-full w-full items-center justify-center")}
     >
-      <fieldset
-        className={classNames(
-          "h-2/3 w-2/3 rounded-md border border-gray-200 p-4"
-        )}
-      >
-        <legend className="bg-white px-1 text-gray-600">Your First Form</legend>
-        <form onSubmit={onSubmit} className="h-full w-full">
-          <ul className="flex h-full w-full flex-col justify-between">
-            <li className="space-y-4">
-              <StyledInput
-                id="user-name"
-                name="user-name"
-                labelText="Name"
-                onChange={onChange}
-              />
-              <StyledInput
-                id="user-email"
-                name="user-email"
-                type="email"
-                labelText="Email"
-                onChange={onChange}
-              />
-              <StyledTextArea
-                id="message"
-                name="message"
-                onChange={onChange}
-                labelText="Message"
-                height={150}
-              />
-            </li>
-            <li>
-              <button
-                type="submit"
-                className="rounded-md bg-green-600 p-3 text-white"
-              >
-                Send your message
-              </button>
-            </li>
-          </ul>
-        </form>
-      </fieldset>
+      <form onSubmit={onSubmit} className="h-3/4 w-3/4">
+        <fieldset className="flex h-full w-full flex-col justify-between rounded-md border px-3 py-5">
+          <legend className="bg-white px-1 text-gray-600">
+            Your First Form
+          </legend>
+          <div className="space-y-3">
+            <StyledInput
+              id="user-name"
+              name="user-name"
+              labelText="Name"
+              onChange={onChange}
+            />
+            <StyledInput
+              id="user-email"
+              name="user-email"
+              type="email"
+              labelText="Email"
+              onChange={onChange}
+            />
+            <StyledTextArea
+              id="message"
+              name="message"
+              onChange={onChange}
+              labelText="Message"
+              height={150}
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="rounded-md bg-green-600 p-3 text-white"
+            >
+              Send your message
+            </button>
+          </div>
+        </fieldset>
+      </form>
     </div>
   );
 }

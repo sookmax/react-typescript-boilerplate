@@ -7,7 +7,6 @@ import React, {
   useState,
 } from "react";
 import { classNames } from "../utils";
-import { obeserveRect } from "../utils/observeRect";
 
 type TabsContextValue = {
   selectedIndex: number;
@@ -24,8 +23,8 @@ const TabsContext = React.createContext<TabsContextValue | undefined>(
 
 export default function Tabs() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [rect, setRect] = useState<DOMRect>();
   const [transition, setTransition] = useState(false);
+  const [rect, setRect] = useState<DOMRect>();
   const [tabElList, setTabElList] = useState<HTMLElement[]>([]);
 
   const getTabIndex = useCallback(
@@ -55,15 +54,15 @@ export default function Tabs() {
     ]
   );
 
-  const transitionStyle = transition ? "all 300ms ease" : undefined;
+  const transitionStyle = transition ? "all 200ms ease" : undefined;
 
   return (
-    <>
+    <div className="flex h-full flex-col justify-center">
       <TabsContext.Provider value={tabsContextValue}>
-        <div className="flex">
+        <div className="flex h-12">
           <Tab className="flex-1 bg-yellow-100 active:bg-yellow-200">Tab</Tab>
+          <Tab className="flex-[3] bg-yellow-100 active:bg-yellow-200">Tab</Tab>
           <Tab className="flex-[2] bg-yellow-100 active:bg-yellow-200">Tab</Tab>
-          <Tab className="flex-1 bg-yellow-100 active:bg-yellow-200">Tab</Tab>
         </div>
       </TabsContext.Provider>
       <div
@@ -75,7 +74,7 @@ export default function Tabs() {
           height: 4,
         }}
       />
-    </>
+    </div>
   );
 }
 
@@ -104,18 +103,32 @@ function TabImpl({ children, className }: TabProps) {
   useEffect(() => {
     if (!elRef.current || !isActive) return;
 
-    const observer = obeserveRect(elRef.current, (rect, initial) => {
-      setRect(rect);
+    const el = elRef.current;
 
-      !initial && setTransition(false);
+    let initialCall = true;
+    const rObserver = new ResizeObserver(() => {
+      setRect(el.getBoundingClientRect());
+
+      if (initialCall) {
+        initialCall = false;
+      } else {
+        setTransition(false);
+      }
     });
 
-    observer.observe();
+    rObserver.observe(el);
 
-    return () => observer.unObserve();
+    return () => {
+      rObserver.unobserve(el);
+    };
   }, [isActive, setRect, setTransition]);
 
   const handleClick = () => {
+    if (!elRef.current) return;
+
+    const el = elRef.current;
+
+    setRect(el.getBoundingClientRect());
     setSelectedIndex(index);
     setTransition(true);
   };

@@ -1,7 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Switch from "./examples/headless-ui/Switch";
-import Tabs from "./examples/Tabs";
+import HtmlTag from "./examples/headless-ui/HtmlTag";
 import "./index.css";
 
 if (process.env.NODE_ENV === "development") {
@@ -15,7 +14,9 @@ if (rootEl) {
   const root = createRoot(rootEl);
   root.render(
     <React.StrictMode>
-      <Tabs />
+      <HtmlTag className="bg-orange-700">
+        <span>hello world</span>
+      </HtmlTag>
     </React.StrictMode>
   );
 }

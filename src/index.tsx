@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { ClickOutside } from "./examples/ClickOutside";
 import Option from "./examples/controlled-forms/select/Option";
 import Select from "./examples/controlled-forms/select/Select";
+import DarkMode from "./examples/DarkMode";
 import HtmlTag from "./examples/headless-ui/HtmlTag";
 import { Input, TextArea } from "./examples/your-first-form/Input";
 import "./index.css";
@@ -18,7 +19,7 @@ if (rootEl) {
   const root = createRoot(rootEl);
   root.render(
     <React.StrictMode>
-      <ClickOutside />
+      <DarkMode />
     </React.StrictMode>
   );
 }

@@ -1,10 +1,10 @@
-import { useCallback, useContext, useRef } from "react";
-import { SelectContext } from "./Select";
+import { useCallback, useRef } from "react";
+import { useSelectContext } from "./Select";
 
 type Props = Omit<JSX.IntrinsicElements["option"], "ref">;
 
 export default function Option(props: Props) {
-  const contextValue = useContext(SelectContext);
+  const contextValue = useSelectContext();
   if (!contextValue)
     throw `[NO CONTEXT FOUND] <Option /> can only be rendered if the context from <Select /> is provided.`;
 
@@ -27,8 +27,4 @@ export default function Option(props: Props) {
   );
 
   return <option ref={onRef} {...props} />;
-}
-
-function Test() {
-  return <Option />;
 }

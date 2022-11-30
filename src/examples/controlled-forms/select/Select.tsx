@@ -1,13 +1,13 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 
 type SelectContextValue = {
   addOptionElement: (element: HTMLOptionElement) => void;
   removeOptionElement: (element: HTMLOptionElement) => void;
 };
 
-export const SelectContext = React.createContext<SelectContextValue | null>(
-  null
-);
+const SelectContext = React.createContext<SelectContextValue | null>(null);
+
+export const useSelectContext = () => useContext(SelectContext);
 
 type Props = {
   onChange?: (value: string) => void;

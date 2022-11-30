@@ -7,6 +7,8 @@ const config: Config = {
   // https://github.com/jsdom/jsdom/issues/1724
   setupFiles: ["<rootDir>/jest-setup.ts"],
   setupFilesAfterEnv: ["<rootDir>/jest-setup-afterEnv.ts"],
+  // Only include files directly in __tests__, not in nested folders.
+  testRegex: "(/__tests__/[^/]*|(\\.|/)(test|spec))\\.[jt]sx?$",
   transform: {
     // this looks redundant since it's the same as default, but
     // it's important to include here when using `pnpm` as your package manager.

@@ -1,17 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { classNames } from "../../utils";
 
-export default function Switch() {
-  const [toggled, setToggled] = useState(false);
+type Props = {
+  value?: boolean;
+  onClick?: () => void;
+} & Omit<JSX.IntrinsicElements["button"], "ref" | "onClick" | "value">;
+
+export default function Switch({ value, onClick, className }: Props) {
+  const [_toggled, _setToggled] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const circleRef = useRef<HTMLSpanElement>(null);
   const xTranslate = useRef(0);
 
-  const onClick = () => {
-    setToggled((toggled) => {
-      return !toggled;
-    });
-  };
+  const toggled = value !== undefined ? value : _toggled;
+
+  const _onClick = useCallback(() => {
+    _setToggled((toggled) => !toggled);
+
+    onClick?.();
+  }, [onClick]);
 
   useEffect(() => {
     if (!buttonRef.current || !circleRef.current) return;
@@ -47,15 +54,15 @@ export default function Switch() {
   }, []);
 
   return (
-    <div className="flex h-full items-center justify-center">
+    <>
       <button
         ref={buttonRef}
-        onClick={onClick}
+        onClick={_onClick}
         className={classNames(
           "flex w-16 items-center rounded-full p-1",
           toggled ? "bg-amber-500" : "bg-gray-300",
-          // toggled ? "justify-end" : "justify-start",
-          "transition-colors"
+          "transition-colors",
+          className
         )}
       >
         <span
@@ -70,6 +77,6 @@ export default function Switch() {
           }}
         />
       </button>
-    </div>
+    </>
   );
 }

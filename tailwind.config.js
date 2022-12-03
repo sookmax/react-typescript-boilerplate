@@ -3,7 +3,15 @@ module.exports = {
   darkMode: "class",
   content: ["./src/**/*.tsx"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        wave: {
+          "100%": {
+            transform: "translateX(100%)",
+          },
+        },
+      },
+    },
   },
   plugins: [],
 };

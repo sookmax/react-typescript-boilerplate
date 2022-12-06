@@ -15,6 +15,7 @@ specifiers:
   '@types/node': ^18.11.9
   '@types/react': ^18.0.25
   '@types/react-dom': ^18.0.8
+  '@types/react-window': ^1.8.5
   '@types/testing-library__jest-dom': ^5.14.5
   '@types/webpack': ^5.28.0
   '@typescript-eslint/eslint-plugin': ^5.42.1
@@ -40,6 +41,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-refresh: ^0.14.0
+  react-viewport-list: ^6.2.0
   style-loader: ^3.3.1
   tailwindcss: ^3.2.4
   ts-node: ^10.9.1
@@ -55,6 +57,7 @@ dependencies:
   core-js: 3.26.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-viewport-list: 6.2.0_react@18.2.0
 
 devDependencies:
   '@babel/cli': 7.19.3_@babel+core@7.20.2
@@ -71,6 +74,7 @@ devDependencies:
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
+  '@types/react-window': 1.8.5
   '@types/testing-library__jest-dom': 5.14.5
   '@types/webpack': 5.28.0_webpack-cli@4.10.0
   '@typescript-eslint/eslint-plugin': 5.43.0_yy4vf4gcvxiubmg7fqa55dqe2i
@@ -2116,6 +2120,12 @@ packages:
 
   /@types/react-dom/18.0.9:
     resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
+    dependencies:
+      '@types/react': 18.0.25
+    dev: true
+
+  /@types/react-window/1.8.5:
+    resolution: {integrity: sha512-V9q3CvhC9Jk9bWBOysPGaWy/Z0lxYcTXLtLipkt2cnRj1JOSFNF7wqGpkScSXMgBwC+fnVRg/7shwgddBG5ICw==}
     dependencies:
       '@types/react': 18.0.25
     dev: true
@@ -6521,6 +6531,14 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-viewport-list/6.2.0_react@18.2.0:
+    resolution: {integrity: sha512-V7nP52BxIVfeTiWmgcvv7QBgYchix9+Q5YiAdRjjKuHmIHO2E/sbVzmI5Hvbjqg7WiEoZPG4EYvejyOlHhO6GQ==}
+    peerDependencies:
+      react: '>=17.0.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

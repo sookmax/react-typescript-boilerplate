@@ -1,7 +1,7 @@
 import ChatBubbleIcon from "../../icons/ChatBubbleIcon";
 import { classNames } from "../../utils";
 import Skeleton from "./Skeleton";
-import useHNData from "./useHNData";
+import useHNData from "./useHackerNewsAPI";
 
 export default function HackerNews() {
   const { status, stories, errorMessage, getMoreStories } = useHNData({

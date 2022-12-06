@@ -24,6 +24,10 @@ const errorHandlers = [
   rest.post("/api/login", (req, res, ctx) => {
     return res(ctx.status(500), ctx.json({ message: "Internal server error" }));
   }),
+
+  rest.get(/hacker-news\.firebaseio\.com\/v0/, (req, res, ctx) => {
+    return res(ctx.status(500), ctx.json({ message: "Internal server error" }));
+  }),
 ];
 
 export function getHandlers(type: "sucess" | "error") {

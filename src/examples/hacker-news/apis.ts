@@ -45,7 +45,7 @@ export async function fetchStoryIds(storyType: StoryType) {
       STORY_APIS[storyType].devCacheKeys.id
     );
     if (cachedIds) {
-      return JSON.parse(cachedIds) as number[];
+      return Promise.resolve(JSON.parse(cachedIds) as number[]);
     }
   }
 
@@ -72,7 +72,9 @@ export async function fetchStories(storyType: StoryType, ids: number[]) {
       STORY_APIS[storyType].devCacheKeys.story
     );
     if (cachedData) {
-      return JSON.parse(cachedData) as Promise<Story[]>;
+      return (JSON.parse(cachedData) as Story[]).map((story) =>
+        Promise.resolve(story)
+      );
     }
   }
 
@@ -81,7 +83,7 @@ export async function fetchStories(storyType: StoryType, ids: number[]) {
       if (!res.ok) {
         throw new Error(`HTTP error, status = ${res.status}`);
       }
-      return res.json() as Promise<Story>;
+      return res.json() as Promise<Story | null>;
     })
   );
 

@@ -10,7 +10,7 @@ import { Story, fetchStoryIds, fetchStories, StoryType } from "./apis";
 type Status = "initializing" | "loading" | "sucess" | "error";
 
 type State = {
-  stories: (Story | null)[];
+  stories: (Story | "loading" | "failed")[];
   status: Status;
   errorMessage: string;
 };
@@ -20,12 +20,17 @@ type Action_setStatus = {
   payload: Status;
 };
 
-type Action_setStories = {
+type Action_setStoryAt = {
   type: "SET_STORY_AT";
   payload: {
     index: number;
-    story: Story;
+    story: Story | "failed";
   };
+};
+
+type Action_removeStoryAt = {
+  type: "REMOVE_STORY_AT";
+  payload: number | number[];
 };
 
 type Action_setErrorMessage = {
@@ -44,7 +49,8 @@ type Action_resetState = {
 
 type Actions =
   | Action_setStatus
-  | Action_setStories
+  | Action_setStoryAt
+  | Action_removeStoryAt
   | Action_setErrorMessage
   | Action_addPlaceholders
   | Action_resetState;
@@ -60,7 +66,10 @@ const reducer: React.Reducer<State, Actions> = (state, action) => {
     case "ADD_PLACEHOLDERS":
       return {
         ...state,
-        stories: [...state.stories, ...new Array(action.payload).fill(null)],
+        stories: [
+          ...state.stories,
+          ...new Array(action.payload).fill("loading"),
+        ],
       };
     case "SET_STORY_AT":
       return {
@@ -71,6 +80,21 @@ const reducer: React.Reducer<State, Actions> = (state, action) => {
           ...state.stories.slice(action.payload.index + 1),
         ],
       };
+    case "REMOVE_STORY_AT":
+      if (typeof action.payload === "number") {
+        return {
+          ...state,
+          stories: [...state.stories].splice(action.payload, 1),
+        };
+      } else {
+        return {
+          ...state,
+          stories: state.stories.filter(
+            (_, idx) => !(action.payload as number[]).includes(idx)
+          ),
+        };
+      }
+
     case "SET_STATUS":
       if (state.status === action.payload) {
         return state;
@@ -106,10 +130,6 @@ export default function useHackerNewsAPI({
   const storyIdsRef = useRef<number[]>([]);
   const cursorRef = useRef(0);
 
-  if (state.stories.length === 0) {
-    dispatch({ type: "ADD_PLACEHOLDERS", payload: initStoryCount });
-  }
-
   const errorHandler = useCallback((error: any) => {
     let message = "Unknown error.";
     if (error instanceof Error) {
@@ -123,46 +143,40 @@ export default function useHackerNewsAPI({
 
   const getMoreStories = useCallback(
     (count = 10) => {
-      try {
-        const nextIds = storyIdsRef.current.slice(
-          cursorRef.current,
-          cursorRef.current + count
-        );
+      const nextIds = storyIdsRef.current.slice(
+        cursorRef.current,
+        cursorRef.current + count
+      );
 
-        if (nextIds.length > 0) {
-          dispatch({ type: "SET_STATUS", payload: "loading" });
-          dispatch({ type: "ADD_PLACEHOLDERS", payload: nextIds.length });
+      if (nextIds.length > 0) {
+        dispatch({ type: "SET_STATUS", payload: "loading" });
+        dispatch({ type: "ADD_PLACEHOLDERS", payload: nextIds.length });
 
-          fetchStories(storyType, nextIds)
-            .then(async (unresolvedStories) => {
-              const totalCount = unresolvedStories.length;
-              let resolvedCount = 0;
-              for (const [
-                index,
-                unresolvedStory,
-              ] of unresolvedStories.entries()) {
-                const resolvedStory = await unresolvedStory;
+        fetchStories(storyType, nextIds)
+          .then((unresolvedStories) => {
+            const totalCount = unresolvedStories.length;
+            let resolvedCount = 0;
+
+            unresolvedStories.forEach((unresolvedStory, index) => {
+              unresolvedStory.then((resolvedStory) => {
+                resolvedCount++;
 
                 dispatch({
                   type: "SET_STORY_AT",
                   payload: {
                     index: cursorRef.current + index,
-                    story: resolvedStory,
+                    story: resolvedStory ? resolvedStory : "failed",
                   },
                 });
 
-                resolvedCount++;
-
                 if (resolvedCount === totalCount) {
-                  dispatch({ type: "SET_STATUS", payload: "sucess" });
                   cursorRef.current += nextIds.length;
+                  dispatch({ type: "SET_STATUS", payload: "sucess" });
                 }
-              }
-            })
-            .catch((e) => errorHandler(e));
-        }
-      } catch (error) {
-        errorHandler(error);
+              });
+            });
+          })
+          .catch((e) => errorHandler(e));
       }
     },
     [errorHandler, storyType]
@@ -171,54 +185,19 @@ export default function useHackerNewsAPI({
   useEffect(() => {
     let abort = false;
 
-    async function getInitialStories() {
-      try {
-        dispatch({
-          type: "SET_STATUS",
-          payload: "loading",
-        });
-
-        const ids = await fetchStoryIds(storyType);
-        storyIdsRef.current = ids;
-
-        const initialIds = ids.slice(cursorRef.current, initStoryCount);
-
-        fetchStories(storyType, initialIds).then(async (unresolvedStories) => {
-          const totalCount = unresolvedStories.length;
-          let resolvedCount = 0;
-          for (const [index, unresolvedStory] of unresolvedStories.entries()) {
-            const resolvedStory = await unresolvedStory;
-
-            if (abort) break;
-
-            dispatch({
-              type: "SET_STORY_AT",
-              payload: {
-                index: cursorRef.current + index,
-                story: resolvedStory,
-              },
-            });
-
-            resolvedCount++;
-
-            if (resolvedCount === totalCount) {
-              dispatch({ type: "SET_STATUS", payload: "sucess" });
-              cursorRef.current += initialIds.length;
-            }
-          }
-        });
-      } catch (error) {
-        errorHandler(error);
-      }
-    }
-
-    getInitialStories();
+    fetchStoryIds(storyType).then((ids) => {
+      if (abort) return;
+      storyIdsRef.current = ids;
+      getMoreStories(initStoryCount);
+    });
 
     return () => {
-      abort = true;
       dispatch({ type: "RESET_STATE" });
+      storyIdsRef.current = [];
+      cursorRef.current = 0;
+      abort = true;
     };
-  }, [initStoryCount, storyType, errorHandler, reset]);
+  }, [storyType, initStoryCount, getMoreStories, reset]);
 
   const reload = useCallback(() => {
     toggleReset((s) => !s);
